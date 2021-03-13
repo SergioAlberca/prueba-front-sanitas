@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Listado de fotos de Picsum </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="isAvailableData()">
+  <!-- Search Bar -->
+  <app-search-bar (setFilter)="filterSearch($event)"></app-search-bar>
+  <!-- List -->
+  <app-list [data]="dataShow" [itemToSearch]="elementSearched"></app-list>
+  <!-- Infinite scroll -->
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

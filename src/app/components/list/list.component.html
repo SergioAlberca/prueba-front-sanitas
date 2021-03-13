@@ -1,0 +1,10 @@
+<ion-list>
+  <ion-item *ngFor="let item of data | filter: itemToSearch">
+    <ion-avatar slot="start">
+      <img src="{{ item.url }}" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ item.text }}</h2>
+    </ion-label>
+  </ion-item>
+</ion-list>
