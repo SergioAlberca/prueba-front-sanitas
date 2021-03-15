@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="isAvailableData()">
+<ion-content [fullscreen]="true">
   <!-- Search Bar -->
   <app-search-bar (setFilter)="filterSearch($event)"></app-search-bar>
   <!-- List -->

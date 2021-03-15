@@ -7,7 +7,7 @@ import { IDataPicsum } from 'src/app/interfaces/data.interface';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  @Input() data: Array<IDataPicsum>;
+  @Input() data: Array<IDataPicsum> = [];
   @Input() itemToSearch: string;
 
   constructor() {}
