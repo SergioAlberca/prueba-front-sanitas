@@ -9,6 +9,7 @@ import { IDataPicsum } from 'src/app/interfaces/data.interface';
 export class ListComponent implements OnInit {
   @Input() data: Array<IDataPicsum> = [];
   @Input() itemToSearch: string;
+  @Input() sliceNumber: number;
 
   constructor() {}
 

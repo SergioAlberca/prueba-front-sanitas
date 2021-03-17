@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { FilterPipe } from 'src/app/pipes/filter/filter.pipe';
 
 import { ListComponent } from './list.component';
 
@@ -10,7 +9,7 @@ describe('ListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComponent, FilterPipe ],
+      declarations: [ ListComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

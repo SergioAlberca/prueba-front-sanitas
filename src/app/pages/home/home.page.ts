@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
 import { IDataPicsum } from '../../interfaces/data.interface';
 
 @Component({
@@ -9,46 +10,47 @@ import { IDataPicsum } from '../../interfaces/data.interface';
 })
 export class HomePage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  public generatedData: Array<IDataPicsum> = [];
-  public dataShow: Array<IDataPicsum> = [];
+  public data: Array<IDataPicsum> = [];
+  public dataFiltered: Array<IDataPicsum> = [];
   public limit: number = 10;
   public elementSearched: string = null;
 
-  constructor() {}
+  constructor(private _dataSrv: DataService) {}
 
   ngOnInit(): void {
-    this.generateData();
-  }
-
-  generateData(): void {
-    for (let i = 0; i < 4000; i++) {
-      this.generatedData.push({
-        id: i.toString(),
-        url: `https://picsum.photos/200/300?random=${i}`,
-        text: `Texto Random ${i}`,
-      });
-    }
-
-    this.dataShow = this.generatedData.slice(0, this.limit);
+    this._dataSrv.loadData().subscribe((data) => {
+      this.data = data;
+    });
   }
 
   loadMoreData(): void {
     this.limit = this.limit + 10;
 
-    this.dataShow = this.generatedData.slice(0, this.limit);
-
     this.infiniteScroll.complete();
 
-    if (this.dataShow.length == 4000) {
+    if (this.limit == 4000) {
       this.infiniteScroll.disabled = true;
     }
   }
 
+  getData(): Array<IDataPicsum> {
+    return this.elementSearched
+      ? this.dataFiltered.slice(0, this.limit)
+      : this.data.slice(0, this.limit);
+  }
+
+  getDataFiltered(element: string) {
+    this._dataSrv.loadDataFiltered(element).subscribe((data) => {
+      this.dataFiltered = data;
+    });
+  }
+
   filterSearch(value: string): void {
     this.elementSearched = value;
+    this.getDataFiltered(this.elementSearched);
   }
 
   isAvailableData(): boolean {
-    return this.dataShow.length > 0;
+    return this.data.length > 0;
   }
 }

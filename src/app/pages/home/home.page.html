@@ -5,11 +5,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Search Bar -->
   <app-search-bar (setFilter)="filterSearch($event)"></app-search-bar>
-  <!-- List -->
-  <app-list [data]="dataShow" [itemToSearch]="elementSearched"></app-list>
-  <!-- Infinite scroll -->
+  <app-list *ngIf="!elementSearched" [data]="getData()" [itemToSearch]="elementSearched"></app-list>
+  <app-list *ngIf="elementSearched" [data]="getData()" [itemToSearch]="elementSearched"></app-list>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
