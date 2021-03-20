@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
 
     this.infiniteScroll.complete();
 
-    if (this.limit == 4000) {
+    if (this.limit >= 4000) {
       this.infiniteScroll.disabled = true;
     }
   }
@@ -40,9 +40,9 @@ export class HomePage implements OnInit {
   }
 
   getDataFiltered(element: string) {
-    this._dataSrv.loadDataFiltered(element).subscribe((data) => {
-      this.dataFiltered = data;
-    });
+    this.dataFiltered = this.data.filter(
+      (e) => e.id === element || e.text.includes(element)
+    );
   }
 
   filterSearch(value: string): void {

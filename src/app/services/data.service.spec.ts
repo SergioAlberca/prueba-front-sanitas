@@ -23,20 +23,4 @@ describe('DataService', () => {
       expect(result).toHaveSize(4000);
     });
   });
-
-  it('the filter should return an array of 1 element', () => {
-    service.loadData().subscribe(result => {
-      service.loadDataFiltered('3000').subscribe((data) => {
-        expect(data).toHaveSize(1);
-      });
-    })
-  });
-
-  it('the filter should return an array empty', () => {
-    service.loadData().subscribe(result => {
-      service.loadDataFiltered('300000').subscribe((data) => {
-        expect(data).toHaveSize(0);
-      });
-    })
-  });
 });
